@@ -1,0 +1,57 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+android {
+    namespace 'com.david.maldonado.laboratoriocalificado04'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.david.maldonado.laboratoriocalificado04"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    // Habilita la característica de ViewBinding para facilitar el acceso a las vistas en el código
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+// Declarar `camerax_version` fuera del bloque `android`
+def camerax_version = "1.0.1"
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+    // Dependencias para la integración con la cámara utilizando CameraX
+    implementation "androidx.camera:camera-camera2:$camerax_version" // Para la integración con la cámara utilizando la API Camera2
+    implementation "androidx.camera:camera-lifecycle:$camerax_version" // Para gestionar el ciclo de vida de la cámara de manera sencilla
+    implementation "androidx.camera:camera-view:1.0.0-alpha27" // Para la vista de la cámara en la interfaz de usuario
+    implementation 'com.github.bumptech.glide:glide:4.12.0' // Biblioteca para cargar imágenes de manera eficiente en vistas
+}
